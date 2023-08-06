@@ -1,0 +1,87 @@
+{% extends "partiales/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+	    
+	    <section class="blog-list px-3 py-5 p-md-5">
+		    <div class="container single-col-max-width">
+              
+			    <div class="item mb-5">
+				    <div class="row g-3 g-xl-0">
+					    <div class="col-2 col-xl-3">
+					        <img class="img-fluid post-thumb rounded-circle" src="{{post.author.profile.image.url}}" alt="image">
+					    </div>
+					    <div class="col">
+						    <h3 class="title mb-1"><a class="text-link" href="blog-post.html">{{post.title}}</a></h3>
+						    <div class="meta mb-1"><span class="date">Published &nbsp;{{post.date_posted}}</span>
+                                
+                                    by &nbsp;{{post.author}}</div>
+                                    <hr>
+						    <div class="intro">{{post.content}}</div>
+						    <hr>
+                            <p>
+                                {%if post.author == request.user %}
+                                <a class="btn btn-primary" href="{% url 'post-edit' post.id %}">Edit</a>
+                                <a class="btn btn-danger" href="{% url 'post-delete' post.id %}">Delete</a>
+                                {% endif %}
+                            </p>
+                            <p> <button class="btn btn-link" type="button" 
+                                data-bs-toggle="collapse" data-bs-target="#collapseExample" 
+                                aria-expanded="false" aria-controls="collapseExample" 
+                                >
+                                   comments : {{post.commentsCount}}
+                                 </button></p>
+                                <div class="collapse" id="collapseExample">
+                                    <div class="card card-body" style="height: 230px; overflow-y: scroll;" >
+                                        {% for comment in post.comments_set.all %}
+                                        <div class="row p-1 align-items-center">
+                                            <div class="col-md-2 d-flex justify-content-center">     
+                                                <img class="rounded-circle me-3 border" style="height: 50px;width: 50px;" 
+                                                src="{{comment.user.profile.image.url}}" width="100" height="100">
+                                            </div>
+                                            <div class="col">
+                                         <h5 class="card-title">
+                                            {{comment.user.username}}
+                                         </h5>
+                                         <h7 class="card-text">
+                                            {{comment.content}}
+                                         </h7>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                     {% endfor %}
+                                    </div>
+                                   <hr>
+                                   <form action="" method="post">
+                                    <div class="row">
+                                        <div class="col md-12">
+                                        {% csrf_token %}
+                                        {{form|crispy}}
+                                        </div>
+                                      <div class="col md-2">
+                                        <input class="btn btn-primary btn-sm" type="submit" value="Comment">
+                                      </div>
+                                       
+                                    </div>
+                                  </form>
+                                    
+                                  </div>
+                            </div>
+                            </div>
+                            
+                        
+                            </div>
+                            
+                        </div><!-- END-->
+
+					    </div><!--//col-->
+				    </div><!--//row-->
+			    </div><!--//item-->
+              
+				
+		    </div>
+	    </section>
+	    
+{% endblock content %}
+
+  

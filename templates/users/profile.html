@@ -1,0 +1,79 @@
+{% extends "partiales/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+	    
+	    <section class="cta-section theme-bg-light py-5">
+		    <div class="container text-center single-col-max-width">
+			    <h2 class="heading">My Profile</h2>
+			    <div class="single-form-max-width pt-3 mx-auto">
+            
+                        <div class="item mb-5">
+                            <div class="row g-3 g-xl-0">
+                                <div class="col-2 col-xl-3">
+                                    <img class="img-fluid post-thumb rounded-circle" src="{{user.profile.image.url}}" alt="image">
+                                </div>
+                                <div class="col mt-2">
+                                   
+                                       <p>
+                                        <h5><a class="nav-link" ><i class="fas fa-user fa-fw me-2"></i>{{user.username}}</a>
+                                   </h5>
+                                       </p>
+                                       <p>
+                                        <h5>
+                                        <a class="nav-link" ><i class="fas fa-envelope fa-fw me-2"></i>{{user.email}}</a>
+                                    </h5>
+                                    </p>
+                                    <p>
+                                    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" style="border-width: 2px;border-style: solid;border-top-color: rgb(255,;border-right-color: 255,;border-bottom-color: 255);border-left-color: 255,;">edit profile</button>
+                                </p>
+                                </div><!--//col-->
+                            </div><!--//row-->
+                        </div><!--//item-->
+      
+                          
+                            <div>
+                                <div class="modal fade" role="dialog" tabindex="-1" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <form method="post" enctype="multipart/form-data">
+                                            <div class="modal-header">
+                                                <h1 class="fs-5 modal-title" id="exampleModalLabel">Edit Profile</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <img class="rounded-circle me-3" style="height: 100px;width: 100px;" 
+                                                        src="{{user.profile.image.url}}" width="50" height="50">
+                                                       
+                                                    </div>
+                                                    <div class="col-md-8">
+                
+                                                        {% csrf_token %}
+                                                        {{u_form|crispy}}
+                                                        {{p_form|crispy}}
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+                                                <button class="btn btn-primary" type="submit">Save changes</button></div>
+                                        </div>
+                                    </form>
+                                    </div>
+                                </div>
+                            
+                            </div>
+                        </div>
+			    </div><!--//single-form-max-width-->
+		    </div><!--//container-->
+	    </section>
+        {% endblock content %}	    
+	    
+
+
+
+   

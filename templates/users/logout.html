@@ -1,0 +1,23 @@
+{% extends "partiales/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+	    
+	    <section class="cta-section theme-bg-light py-5">
+		    <div class="container text-center single-col-max-width">
+	
+			    <div class="single-form-max-width pt-3 mx-auto">
+                    <img id="logout" src="{%static '/img/sad.png'%}" alt="My image"  
+                    class="img-fluid" >
+                    <hr>
+                    <h4>you've been logout</h4>
+                    <h4><a class="subheading" onmouseover="changeImage()" onmouseout="hoverout()" 
+                        href={%url 'login'%}>login</a></h4>
+			    </div><!--//single-form-max-width-->
+		    </div><!--//container-->
+	    </section>
+        {% endblock content %}	    
+	    
+
+
+
